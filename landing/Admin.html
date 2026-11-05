@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUFATECH LTD | Admin Dashboard</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            color: #222;
+        }
+        header {
+            background: #073b4c;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+        main {
+            width: min(1000px, 94%);
+            margin: 25px auto;
+        }
+        .panel {
+            background: white;
+            padding: 22px;
+            margin-bottom: 22px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 11px;
+            margin: 7px 0;
+            font: inherit;
+            border-radius: 5px;
+        }
+        input, textarea {
+            border: 1px solid #bbb;
+        }
+        button {
+            border: 0;
+            background: #118ab2;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background: #073b4c; }
+        .secondary { background: #555; }
+        .danger { background: #b42318; }
+        .product {
+            border: 1px solid #ddd;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 7px;
+            overflow-wrap: anywhere;
+        }
+        .product button { width: auto; padding: 9px 14px; }
+        .hidden { display: none; }
+        #message { font-weight: bold; white-space: pre-wrap; }
+        .hint { color: #555; font-size: 14px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>ZUFATECH LTD</h1>
+    <p>Shop Administration Dashboard</p>
+</header>
+
+<main>
+    <section class="panel" id="login-panel">
+        <h2>Admin Login</h2>
+        <p>Sign in to manage your shop products.</p>
+        <form id="login-form">
+            <label for="username">Username</label>
+            <input id="username" autocomplete="username"
+                   required placeholder="Admin username">
+
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+    <input id="password"
+           type="password"
+           autocomplete="current-password"
+           required
+           placeholder="Admin password">
+
+    <button type="button"
+            id="toggle-password"
+            aria-label="Show password">
+        👁
+    </button>
+</div>
+
+<button type="submit">Log In</button>
+</form>
+</section>
+
+    <section class="panel hidden" id="dashboard">
+        <h2>Product Management</h2>
+        <p class="hint">Add products, update prices, or deactivate products.</p>
+        <button type="button" class="secondary" id="refresh-btn">
+            Refresh Products
+        </button>
+        <button type="button" class="secondary" id="logout-btn">
+            Log Out
+        </button>
+
+        <hr>
+        <h3 id="form-title">Add a New Product</h3>
+        <form id="product-form">
+            <input type="hidden" id="product-id">
+
+            <label for="product-name">Product Name</label>
+            <input id="product-name" required placeholder="e.g. Samsung Galaxy">
+
+            <label for="product-description">Description / Specifications</label>
+            <textarea id="product-description" rows="3"
+                      placeholder="Describe the product"></textarea>
+
+            <label for="product-image">Image filename</label>
+            <input id="product-image" placeholder="e.g. samsung.jpg">
+            <p class="hint">Use an existing image filename from your project.</p>
+
+            <label for="product-prices">Prices in KSh</label>
+            <input id="product-prices" required
+                   placeholder="e.g. 180000 or 180000, 150000">
+            <p class="hint">For multiple prices, separate numbers with commas.</p>
+
+            <label>
+                <input id="product-active" type="checkbox" checked
+                       style="width:auto">
+                Product is active
+            </label>
+
+            <button type="submit" id="save-btn">Add Product</button>
+            <button type="button" class="secondary hidden" id="cancel-btn">
+                Cancel Editing
+            </button>
+        </form>
+
+        <hr>
+        <h3>Existing Products</h3>
+        <div id="products-list">Loading products...</div>
+    </section>
+
+    <section class="panel">
+        <p id="message" role="status" aria-live="polite"></p>
+        <p><a href="/">Return to the main shop</a></p>
+    </section>
+</main>
+
+<script src="/Admin.js"></script>
+</body>
+</html>
